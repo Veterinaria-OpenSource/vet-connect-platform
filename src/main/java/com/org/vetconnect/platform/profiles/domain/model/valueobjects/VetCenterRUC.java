@@ -3,18 +3,19 @@ package com.org.vetconnect.platform.profiles.domain.model.valueobjects;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
-public record VetCenterRUC(Long VetCenterRUC) {
+public record VetCenterRUC(Long vetCenterRUC) {
+    public VetCenterRUC() {
+        this(null);
+    }
 
-    // ruc not null and ruc length is 11
-    public VetCenterRUC(Long VetCenterRUC) {
-        if (VetCenterRUC != null && VetCenterRUC.toString().length() == 11) {
-            this.VetCenterRUC = VetCenterRUC;
-        } else {
-            throw new IllegalArgumentException("RUC must be 11 digits");
+    public VetCenterRUC {
+        if (vetCenterRUC == null) {
+            throw new IllegalArgumentException("RUC cannot be null");
+        }
+        if (vetCenterRUC.toString().length() != 11) {
+            throw new IllegalArgumentException("RUC must have 11 digits");
         }
     }
 
-    public Long getVetCenterRUC() {
-        return VetCenterRUC;
-    }
+
 }
