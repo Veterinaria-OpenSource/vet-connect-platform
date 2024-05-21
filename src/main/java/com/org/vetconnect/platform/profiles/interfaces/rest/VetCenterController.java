@@ -1,5 +1,6 @@
 package com.org.vetconnect.platform.profiles.interfaces.rest;
 
+import com.org.vetconnect.platform.profiles.domain.model.queries.GetAllVetCentersQuery;
 import com.org.vetconnect.platform.profiles.domain.model.queries.GetVetCenterByIdQuery;
 import com.org.vetconnect.platform.profiles.domain.model.queries.GetVetCenterByNameQuery;
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterName;
@@ -15,6 +16,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -93,6 +97,15 @@ public class VetCenterController {
         var vetCenterResource = VetCenterResourceFromEntityAssembler.toResourceFromEntity(updatedVetCenter);
 
         return new ResponseEntity<>(vetCenterResource, HttpStatus.OK);
+    }
+
+    // obtener todos los centros veterinarios
+    @GetMapping
+    public ResponseEntity<List<VetCenterResource>> getAllVetCenters() {
+        var getAllVetCentersQuery = new GetAllVetCentersQuery();
+        var vetCenters = vetCenterQueryService.handle(getAllVetCentersQuery);
+        var vetCenterResources = vetCenters.stream().map(VetCenterResourceFromEntityAssembler::toResourceFromEntity).collect(Collectors.toList());
+        return ResponseEntity.ok(vetCenterResources);
     }
 
 }
