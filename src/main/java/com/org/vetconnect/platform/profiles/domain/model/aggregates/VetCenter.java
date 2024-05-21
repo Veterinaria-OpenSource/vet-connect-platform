@@ -6,6 +6,7 @@ import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterP
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterRUC;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.domain.AbstractAggregateRoot;
@@ -21,15 +22,19 @@ public class VetCenter extends AbstractAggregateRoot<VetCenter> {
     private Long id;
 
     @Embedded
+    @Setter
     private VetCenterName vetCenterName;
 
     @Embedded
+    @Setter
     private VetCenterEmail vetCenterEmail;
 
     @Embedded
+    @Setter
     private VetCenterRUC vetCenterRUC;
 
     @Embedded
+    @Setter
     private VetCenterPhone vetCenterPhone;
 
 
@@ -59,12 +64,29 @@ public class VetCenter extends AbstractAggregateRoot<VetCenter> {
     }
 
     public Long getRUC(){
-        return this.vetCenterRUC.getVetCenterRUC();
+        return this.vetCenterRUC.vetCenterRUC();
     }
 
     public Long getPhone(){
         return this.vetCenterPhone.getVetCenterPhone();
     }
+
+    public void setName(String name){
+        this.vetCenterName = new VetCenterName(name);
+    }
+
+    public void setEmail(String email){
+        this.vetCenterEmail = new VetCenterEmail(email);
+    }
+
+    public void setPhone(Long phone){
+        this.vetCenterPhone = new VetCenterPhone(phone);
+    }
+
+    public void setRUC(Long ruc){
+        this.vetCenterRUC = new VetCenterRUC(ruc);
+    }
+
 
     public void setId(Long id) {
         this.id = id;
