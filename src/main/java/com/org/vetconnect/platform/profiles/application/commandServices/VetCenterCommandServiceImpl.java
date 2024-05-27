@@ -3,6 +3,7 @@ package com.org.vetconnect.platform.profiles.application.commandServices;
 import com.org.vetconnect.platform.profiles.domain.model.aggregates.VetCenter;
 import com.org.vetconnect.platform.profiles.domain.model.commands.CreateVetCenterCommand;
 import com.org.vetconnect.platform.profiles.domain.model.commands.UpdateVetCenterCommand;
+import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterPhone;
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterRUC;
 import com.org.vetconnect.platform.profiles.domain.services.VetCenterCommandService;
 import com.org.vetconnect.platform.profiles.infrastructure.persistence.jpa.repositories.VetCenterRepository;
@@ -45,10 +46,29 @@ public class VetCenterCommandServiceImpl implements VetCenterCommandService {
     @Override
     public Long handle(UpdateVetCenterCommand command) {
         var vetCenter = vetCenterRepository.findById(command.id()).orElseThrow(() -> new IllegalArgumentException("VetCenter with id " + command.id() + " does not exist"));
-        vetCenter.setName(command.name());
-        vetCenter.setEmail(command.email());
-        vetCenter.setPhone(command.phone());
-        vetCenter.setRUC(command.ruc());
+
+        // si el nombre es diferente de null, de "string" y no esta vacio, actualiza el nombre
+        if (command.name() != null && !command.name().equals("string") && !command.name().isEmpty()) {
+            vetCenter.setName(command.name());
+        }
+
+        // si el email es diferente de null, de "string" y no esta vacio, actualiza el email
+        if (command.email() != null && !command.email().equals("string") && !command.email().isEmpty()) {
+            vetCenter.setEmail(command.email());
+        }
+
+        // si el phone es diferente de null, de 0 y no esta vacio, actualiza el phone
+        if (command.phone() != null && command.phone() != 0) {
+            vetCenter.setVetCenterPhone(new VetCenterPhone(command.phone()));
+        }
+
+        /**
+         * para guardar sin validaciones simplemente se pondria:
+         * vetCenter.setName(command.name());
+         * vetCenter.setEmail(command.email());
+         * vetCenter.setVetCenterPhone(new VetCenterPhone(command.phone()));
+         * */
+
         vetCenterRepository.save(vetCenter);
         return vetCenter.getId();
     }

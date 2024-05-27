@@ -5,6 +5,8 @@ import com.org.vetconnect.platform.profiles.domain.model.commands.CreatePetOwner
 import com.org.vetconnect.platform.profiles.domain.model.commands.UpdatePetOwnerCommand;
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.PetOwnerDNI;
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.PetOwnerEmail;
+import com.org.vetconnect.platform.profiles.domain.model.valueobjects.PetOwnerName;
+import com.org.vetconnect.platform.profiles.domain.model.valueobjects.PetOwnerPhone;
 import com.org.vetconnect.platform.profiles.domain.services.PetOwnerCommandService;
 import com.org.vetconnect.platform.profiles.infrastructure.persistence.jpa.repositories.PetOwnerRepository;
 import org.springframework.stereotype.Service;
@@ -54,10 +56,36 @@ public class PetOwnerCommandServiceImpl implements PetOwnerCommandService {
     @Override
     public Long handle(UpdatePetOwnerCommand command) {
         var petOwner = petOwnerRepository.findById(command.id()).orElseThrow(() -> new IllegalArgumentException("PetOwner with id " + command.id() + " does not exist"));
-        petOwner.setName(command.name());
-        petOwner.setEmail(command.email());
-        petOwner.setPhone(command.phone());
-        petOwner.setPhoto(command.photo());
+
+        // si el nombre es diferente de null, de "string" y no esta vacio, actualiza el nombre
+        if (command.name() != null && !command.name().equals("string") && !command.name().isEmpty()) {
+            petOwner.setPetOwnerName(new PetOwnerName(command.name()));
+        }
+
+        // si el email es diferente de null, de "string" y no esta vacio, actualiza el email
+        if (command.email() != null && !command.email().equals("string") && !command.email().isEmpty()) {
+            petOwner.setPetOwnerEmail(new PetOwnerEmail(command.email()));
+        }
+        // si el phone es diferente de null, de 0 y no esta vacio, actualiza el phone
+        if (command.phone() != null && command.phone() != 0 ) {
+            petOwner.setPetOwnerPhone(new PetOwnerPhone(command.phone()));
+        }
+
+
+        // si el photo es diferente de null, de "string" y no esta vacio, actualiza el photo
+        if (command.photo() != null && !command.photo().equals("string") && !command.photo().isEmpty()) {
+            petOwner.setPetOwnerPhoto(command.photo());
+        }
+
+        /*
+        * para guardar sin validaciones simplemente se pondria:
+        * petOwner.setPetOwnerName(new PetOwnerName(command.name()));
+        * petOwner.setPetOwnerEmail(new PetOwnerEmail(command.email()));
+        * petOwner.setPetOwnerPhone(new PetOwnerPhone(command.phone()));
+        * petOwner.setPetOwnerPhoto(command.photo());
+        * */
+
+
         petOwnerRepository.save(petOwner);
         return petOwner.getId();
     }
