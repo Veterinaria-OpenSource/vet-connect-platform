@@ -105,6 +105,4 @@ public class PetOwner extends AbstractAggregateRoot<PetOwner> {
     public void setId(Long id){
         this.id = id;
     }
-
-
 }
