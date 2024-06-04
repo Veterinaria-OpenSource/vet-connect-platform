@@ -1,5 +1,6 @@
 package com.org.vetconnect.platform.profiles.interfaces.rest;
 
+import com.org.vetconnect.platform.profiles.domain.model.aggregates.VetCenter;
 import com.org.vetconnect.platform.profiles.domain.model.queries.GetAllVetCentersQuery;
 import com.org.vetconnect.platform.profiles.domain.model.queries.GetVetCenterByIdQuery;
 import com.org.vetconnect.platform.profiles.domain.model.queries.GetVetCenterByNameQuery;
@@ -107,5 +108,6 @@ public class VetCenterController {
         var vetCenterResources = vetCenters.stream().map(VetCenterResourceFromEntityAssembler::toResourceFromEntity).collect(Collectors.toList());
         return ResponseEntity.ok(vetCenterResources);
     }
+
 
 }

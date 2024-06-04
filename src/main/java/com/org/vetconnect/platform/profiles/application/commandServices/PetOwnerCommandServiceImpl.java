@@ -74,7 +74,7 @@ public class PetOwnerCommandServiceImpl implements PetOwnerCommandService {
 
         // si el photo es diferente de null, de "string" y no esta vacio, actualiza el photo
         if (command.photo() != null && !command.photo().equals("string") && !command.photo().isEmpty()) {
-            petOwner.setPetOwnerPhoto(command.photo());
+            petOwner.setPhoto(command.photo());
         }
 
         /*

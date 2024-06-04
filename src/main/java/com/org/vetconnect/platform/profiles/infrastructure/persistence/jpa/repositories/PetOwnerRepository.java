@@ -13,5 +13,4 @@ public interface PetOwnerRepository extends JpaRepository<PetOwner, Long> {
 
     Optional<PetOwner> findPetOwnerByPetOwnerDNI(PetOwnerDNI petOwnerDNI);
     Optional<PetOwner> findPetOwnerByPetOwnerEmail(PetOwnerEmail petOwnerEmail);
-    Optional<PetOwner> findPetOwnerByPetOwnerDNIAndPetOwnerEmail(PetOwnerDNI petOwnerDNI, PetOwnerEmail petOwnerEmail);
 }

@@ -5,7 +5,6 @@ import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterN
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterPhone;
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterRUC;
 import jakarta.persistence.*;
-import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -18,7 +17,6 @@ public class VetCenter extends AbstractAggregateRoot<VetCenter> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
     private Long id;
 
     @Embedded
@@ -37,6 +35,14 @@ public class VetCenter extends AbstractAggregateRoot<VetCenter> {
     @Setter
     private VetCenterPhone vetCenterPhone;
 
+
+    /*
+    @Setter
+    private String vetCenterServices; // seria un record (porque tiene 4 servicios) y cada servicio tiene un nombre y un precio
+    */
+
+    @Setter
+    private String vetCenterPhoto;
 
     @CreatedDate
     private String createdAt;
