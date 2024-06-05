@@ -1,4 +1,4 @@
-package com.org.vetconnect.platform.profiles.interfaces.rest.transform;
+package com.org.vetconnect.platform.profiles.interfaces.rest.transform.Reviews;
 
 import com.org.vetconnect.platform.profiles.domain.model.entities.Review;
 import com.org.vetconnect.platform.profiles.interfaces.rest.resources.Reviews.ReviewResource;

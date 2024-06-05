@@ -1,4 +1,4 @@
-package com.org.vetconnect.platform.profiles.interfaces.rest.transform;
+package com.org.vetconnect.platform.profiles.interfaces.rest.transform.PetOwners;
 
 import com.org.vetconnect.platform.profiles.domain.model.commands.CreatePetOwnerCommand;
 import com.org.vetconnect.platform.profiles.interfaces.rest.resources.PetOwners.CreatePetOwnerResource;

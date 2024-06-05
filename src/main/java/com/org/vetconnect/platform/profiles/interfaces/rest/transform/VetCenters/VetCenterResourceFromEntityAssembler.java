@@ -1,4 +1,4 @@
-package com.org.vetconnect.platform.profiles.interfaces.rest.transform;
+package com.org.vetconnect.platform.profiles.interfaces.rest.transform.VetCenters;
 
 import com.org.vetconnect.platform.profiles.domain.model.aggregates.VetCenter;
 import com.org.vetconnect.platform.profiles.interfaces.rest.resources.VetCenters.VetCenterResource;

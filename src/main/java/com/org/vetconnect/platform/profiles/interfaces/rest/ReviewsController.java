@@ -7,8 +7,8 @@ import com.org.vetconnect.platform.profiles.domain.services.ReviewCommandService
 import com.org.vetconnect.platform.profiles.domain.services.ReviewQueryService;
 import com.org.vetconnect.platform.profiles.interfaces.rest.resources.Reviews.CreateReviewResource;
 import com.org.vetconnect.platform.profiles.interfaces.rest.resources.Reviews.ReviewResource;
-import com.org.vetconnect.platform.profiles.interfaces.rest.transform.CreateReviewCommandFromResourceAssembler;
-import com.org.vetconnect.platform.profiles.interfaces.rest.transform.ReviewResourceFromEntityAssembler;
+import com.org.vetconnect.platform.profiles.interfaces.rest.transform.Reviews.CreateReviewCommandFromResourceAssembler;
+import com.org.vetconnect.platform.profiles.interfaces.rest.transform.Reviews.ReviewResourceFromEntityAssembler;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
