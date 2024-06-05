@@ -10,7 +10,6 @@ import java.util.Optional;
 
 public interface BookingQueryService {
     Optional<Booking> handle(GetBookingByIdQuery query);
-    List<Booking> handle(GetAllBookingsByTypeServiceQuery query);
     List<Booking> handle(GetBookingsByTypeServiceInWeekQuery query);
 
 }
