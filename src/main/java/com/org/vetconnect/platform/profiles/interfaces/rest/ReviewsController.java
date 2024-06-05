@@ -10,6 +10,7 @@ import com.org.vetconnect.platform.profiles.interfaces.rest.resources.ReviewReso
 import com.org.vetconnect.platform.profiles.interfaces.rest.transform.CreateReviewCommandFromResourceAssembler;
 import com.org.vetconnect.platform.profiles.interfaces.rest.transform.ReviewResourceFromEntityAssembler;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,9 +20,9 @@ import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/v1/reviews")
+@RequestMapping(value="/api/v1/reviews", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name = "Reviews", description = "Reviews Management Endpoints")
-public class ReviewController {
+public class ReviewsController {
 
     private final ReviewCommandService reviewCommandService;
     private final ReviewQueryService reviewQueryService;
@@ -30,7 +31,7 @@ public class ReviewController {
     private final CreateReviewCommandFromResourceAssembler createReviewCommandFromResourceAssembler;
     private final ReviewResourceFromEntityAssembler reviewsResourceFromEntityAssembler;
 
-    public ReviewController
+    public ReviewsController
             (ReviewCommandService reviewCommandService,
              ReviewQueryService reviewQueryService,
              CreateReviewCommandFromResourceAssembler createReviewCommandFromResourceAssembler,

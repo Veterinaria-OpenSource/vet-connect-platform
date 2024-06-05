@@ -21,13 +21,13 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/v1/pet-owners", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name = "Pet Owners", description = "Pet Owners Management Endpoints")
-public class PetOwnerController {
+public class PetOwnersController {
 
     private final PetOwnerQueryService petOwnerQueryService;
     private final PetOwnerCommandService petOwnerCommandService;
 
 
-    public PetOwnerController(PetOwnerQueryService petOwnerQueryService, PetOwnerCommandService petOwnerCommandService) {
+    public PetOwnersController(PetOwnerQueryService petOwnerQueryService, PetOwnerCommandService petOwnerCommandService) {
         this.petOwnerQueryService = petOwnerQueryService;
         this.petOwnerCommandService = petOwnerCommandService;
     }
