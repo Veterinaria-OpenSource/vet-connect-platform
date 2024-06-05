@@ -1,8 +1,11 @@
 package com.org.vetconnect.platform.appointments.domain.model.queries;
 
+import com.org.vetconnect.platform.appointments.domain.model.valueobjects.ServiceType;
+
 import java.time.LocalDateTime;
 
-public record GetBookingsInWeekQuery(
+public record GetBookingsByTypeServiceInWeekQuery(
+        ServiceType serviceType,
         LocalDateTime startOfWeek,
         LocalDateTime endOfWeek
 ) {
