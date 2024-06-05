@@ -1,7 +1,6 @@
 package com.org.vetconnect.platform.appointments.application.queryServices;
 
 import com.org.vetconnect.platform.appointments.domain.model.aggregates.Booking;
-import com.org.vetconnect.platform.appointments.domain.model.queries.GetAllBookingsByTypeServiceQuery;
 import com.org.vetconnect.platform.appointments.domain.model.queries.GetBookingByIdQuery;
 import com.org.vetconnect.platform.appointments.domain.model.queries.GetBookingsByTypeServiceInWeekQuery;
 import com.org.vetconnect.platform.appointments.domain.services.BookingQueryService;

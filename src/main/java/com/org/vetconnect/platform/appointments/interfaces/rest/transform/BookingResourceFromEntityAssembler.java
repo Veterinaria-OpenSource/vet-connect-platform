@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BookingResourceFromEntityAssembler {
-    public static BookingResource toResourceFromEntity(Booking booking) {
+    public BookingResource toResourceFromEntity(Booking booking) {
         return new BookingResource(
                 booking.getId(),
                 booking.getPetOwner().getId(),

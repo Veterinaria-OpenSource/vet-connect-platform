@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CreateBookingCommandFromResourceAssembler {
-    public static CreateBookingCommand toCommandFromResource(CreateBookingResource resource) {
+    public CreateBookingCommand toCommandFromResource(CreateBookingResource resource) {
         return new CreateBookingCommand(
                 resource.petOwnerId(),
                 resource.vetCenterId(),
