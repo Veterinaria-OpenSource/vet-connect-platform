@@ -1,7 +1,7 @@
 package com.org.vetconnect.platform.profiles.interfaces.rest.transform;
 
 import com.org.vetconnect.platform.profiles.domain.model.commands.UpdateVetCenterCommand;
-import com.org.vetconnect.platform.profiles.interfaces.rest.resources.CreateVetCenterResource;
+import com.org.vetconnect.platform.profiles.interfaces.rest.resources.VetCenters.CreateVetCenterResource;
 
 public class UpdateVetCenterCommandFromResourceAssembler {
 
