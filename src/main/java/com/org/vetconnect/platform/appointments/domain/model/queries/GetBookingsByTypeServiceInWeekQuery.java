@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public record GetBookingsByTypeServiceInWeekQuery(
         ServiceType serviceType,
-        LocalDateTime startOfWeek,
-        LocalDateTime endOfWeek
+        LocalDateTime startDateTime,
+        LocalDateTime endDateTime
 ) {
 }
