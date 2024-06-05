@@ -1,6 +1,5 @@
 package com.org.vetconnect.platform.profiles.interfaces.rest;
 
-import com.org.vetconnect.platform.profiles.domain.model.aggregates.VetCenter;
 import com.org.vetconnect.platform.profiles.domain.model.queries.GetAllVetCentersQuery;
 import com.org.vetconnect.platform.profiles.domain.model.queries.GetVetCenterByIdQuery;
 import com.org.vetconnect.platform.profiles.domain.model.queries.GetVetCenterByNameQuery;
@@ -25,12 +24,12 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/api/v1/vet-centers", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name = "Vet Centers", description = "Vet Centers Management Endpoints")
-public class VetCenterController {
+public class VetCentersController {
 
     private final VetCenterQueryService vetCenterQueryService;
     private final VetCenterCommandService vetCenterCommandService;
 
-    public VetCenterController(VetCenterQueryService vetCenterQueryService, VetCenterCommandService vetCenterCommandService) {
+    public VetCentersController(VetCenterQueryService vetCenterQueryService, VetCenterCommandService vetCenterCommandService) {
         this.vetCenterQueryService = vetCenterQueryService;
         this.vetCenterCommandService = vetCenterCommandService;
     }
