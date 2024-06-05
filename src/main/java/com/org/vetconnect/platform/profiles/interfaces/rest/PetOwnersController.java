@@ -4,11 +4,11 @@ import com.org.vetconnect.platform.profiles.domain.model.queries.GetAllPetOwners
 import com.org.vetconnect.platform.profiles.domain.model.queries.GetPetOwnerByIdQuery;
 import com.org.vetconnect.platform.profiles.domain.services.PetOwnerCommandService;
 import com.org.vetconnect.platform.profiles.domain.services.PetOwnerQueryService;
-import com.org.vetconnect.platform.profiles.interfaces.rest.resources.CreatePetOwnerResource;
-import com.org.vetconnect.platform.profiles.interfaces.rest.resources.PetOwnerResource;
-import com.org.vetconnect.platform.profiles.interfaces.rest.transform.CreatePetOwnerCommandFromResourceAssembler;
-import com.org.vetconnect.platform.profiles.interfaces.rest.transform.PetOwnerResourceFromEntityAssembler;
-import com.org.vetconnect.platform.profiles.interfaces.rest.transform.UpdatePetOwnerCommandFromResourceAssembler;
+import com.org.vetconnect.platform.profiles.interfaces.rest.resources.PetOwners.CreatePetOwnerResource;
+import com.org.vetconnect.platform.profiles.interfaces.rest.resources.PetOwners.PetOwnerResource;
+import com.org.vetconnect.platform.profiles.interfaces.rest.transform.PetOwners.CreatePetOwnerCommandFromResourceAssembler;
+import com.org.vetconnect.platform.profiles.interfaces.rest.transform.PetOwners.PetOwnerResourceFromEntityAssembler;
+import com.org.vetconnect.platform.profiles.interfaces.rest.transform.PetOwners.UpdatePetOwnerCommandFromResourceAssembler;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

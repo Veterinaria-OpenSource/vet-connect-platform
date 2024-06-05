@@ -1,7 +1,7 @@
-package com.org.vetconnect.platform.profiles.interfaces.rest.transform;
+package com.org.vetconnect.platform.profiles.interfaces.rest.transform.PetOwners;
 
 import com.org.vetconnect.platform.profiles.domain.model.aggregates.PetOwner;
-import com.org.vetconnect.platform.profiles.interfaces.rest.resources.PetOwnerResource;
+import com.org.vetconnect.platform.profiles.interfaces.rest.resources.PetOwners.PetOwnerResource;
 
 public class PetOwnerResourceFromEntityAssembler {
 

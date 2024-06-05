@@ -1,4 +1,4 @@
-package com.org.vetconnect.platform.profiles.interfaces.rest.resources;
+package com.org.vetconnect.platform.profiles.interfaces.rest.resources.Reviews;
 
 // record que recibe los datos necesarios para crear una reseña
 public record CreateReviewResource(

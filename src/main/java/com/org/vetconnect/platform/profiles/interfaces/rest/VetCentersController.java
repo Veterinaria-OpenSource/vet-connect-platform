@@ -6,11 +6,11 @@ import com.org.vetconnect.platform.profiles.domain.model.queries.GetVetCenterByN
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterName;
 import com.org.vetconnect.platform.profiles.domain.services.VetCenterCommandService;
 import com.org.vetconnect.platform.profiles.domain.services.VetCenterQueryService;
-import com.org.vetconnect.platform.profiles.interfaces.rest.resources.CreateVetCenterResource;
-import com.org.vetconnect.platform.profiles.interfaces.rest.resources.VetCenterResource;
-import com.org.vetconnect.platform.profiles.interfaces.rest.transform.CreateVetCenterCommandFromResourceAssembler;
-import com.org.vetconnect.platform.profiles.interfaces.rest.transform.UpdateVetCenterCommandFromResourceAssembler;
-import com.org.vetconnect.platform.profiles.interfaces.rest.transform.VetCenterResourceFromEntityAssembler;
+import com.org.vetconnect.platform.profiles.interfaces.rest.resources.VetCenters.CreateVetCenterResource;
+import com.org.vetconnect.platform.profiles.interfaces.rest.resources.VetCenters.VetCenterResource;
+import com.org.vetconnect.platform.profiles.interfaces.rest.transform.VetCenters.CreateVetCenterCommandFromResourceAssembler;
+import com.org.vetconnect.platform.profiles.interfaces.rest.transform.VetCenters.UpdateVetCenterCommandFromResourceAssembler;
+import com.org.vetconnect.platform.profiles.interfaces.rest.transform.VetCenters.VetCenterResourceFromEntityAssembler;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
