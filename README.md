@@ -21,3 +21,8 @@ from the database. The API is secured using JWT authentication and authorization
 - Brayan Stiven Gamboa Delgado.
 - Fabricio Gabriel Iparraguirre Quintero.
 - Renzo Manuel Ramos Ramirez.
+
+### Preview
+
+![image](https://github.com/Veterinaria-OpenSource/vet-connect-platform/assets/116921103/d02f14f3-9668-45ba-91eb-9a0fa31a53eb)
+

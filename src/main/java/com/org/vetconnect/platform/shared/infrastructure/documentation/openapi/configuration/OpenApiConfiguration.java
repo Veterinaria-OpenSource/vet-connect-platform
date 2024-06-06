@@ -26,7 +26,7 @@ public class OpenApiConfiguration {
                                 .url("https://springdoc.org")))
                 .externalDocs(new ExternalDocumentation()
                         .description("VetConnect wiki Documentation")
-                        .url("https://fastgym.wiki.github.io/docs"));
+                        .url("https://vetconnect-platform.wiki.github.io/docs"));
 
 
         openApi
