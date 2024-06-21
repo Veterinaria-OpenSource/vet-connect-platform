@@ -1,5 +1,6 @@
 package com.org.vetconnect.platform.profiles.domain.model.aggregates;
 
+import com.org.vetconnect.platform.profiles.domain.model.entities.VetCenterImage;
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterEmail;
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterName;
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterPhone;
@@ -10,6 +11,9 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.domain.AbstractAggregateRoot;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @EntityListeners(AuditingEntityListener.class)
 @Entity
@@ -35,7 +39,8 @@ public class VetCenter extends AbstractAggregateRoot<VetCenter> {
     @Setter
     private VetCenterPhone vetCenterPhone;
 
-
+    @OneToMany(mappedBy = "vetCenter", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<VetCenterImage> images = new ArrayList<>();
     /*
     @Setter
     private String vetCenterServices; // seria un record (porque tiene 4 servicios) y cada servicio tiene un nombre y un precio
@@ -59,6 +64,30 @@ public class VetCenter extends AbstractAggregateRoot<VetCenter> {
 
     public VetCenter(){
 
+    }
+
+    public void addImage(String url) {
+        if (this.images.size() >= 6) {
+            throw new IllegalArgumentException("Cannot add more than 6 images");
+        }
+        VetCenterImage image = new VetCenterImage(url);
+        image.setVetCenter(this); // establecer la relación bidireccional
+        this.images.add(image);
+    }
+
+    public void removeImage(Long imageId) {
+        this.images.removeIf(image -> image.getId().equals(imageId));
+    }
+
+    public List<VetCenterImage> getImages() {
+        return images;
+    }
+
+    public void setImages(List<VetCenterImage> images) {
+        if (images.size() > 6) {
+            throw new IllegalArgumentException("Cannot have more than 6 images");
+        }
+        this.images = images;
     }
 
     public String getName(){
