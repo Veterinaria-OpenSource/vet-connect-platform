@@ -93,16 +93,19 @@ public class WebSecurityConfiguration {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(
                                 "/api/v1/authentication/**",
-                                "/api/v1/reviews/**",
-                                "/api/v1/vet-centers/**",
-                                "/api/v1/pet-owners/**",
-                                "/api/v1/bookings/**",
+
                                 "/v3/api-docs/**",
                                 "/swagger-ui.html",
                                 "/swagger-ui/**",
                                 "/swagger-resources/**",
                                 "/webjars/**"
                         ).permitAll()
+                        .requestMatchers(
+                                "/api/v1/vet-centers/**",
+                                "/api/v1/reviews/**",
+                                "/api/v1/pet-owners/**",
+                                "/api/v1/bookings/**"
+                        ).authenticated() // Requiere autenticación para estas rutas
                         .anyRequest().authenticated());
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authorizationRequestFilter(), UsernamePasswordAuthenticationFilter.class);
