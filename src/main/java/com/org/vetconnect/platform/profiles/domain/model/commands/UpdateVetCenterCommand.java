@@ -5,5 +5,8 @@ public record UpdateVetCenterCommand(
         String name,
         String email,
         Long ruc,
-        Long phone) {
+        Long phone,
+        String imageProfile,
+        String description
+) {
 }

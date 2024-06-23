@@ -6,6 +6,7 @@ import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterN
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterPhone;
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterRUC;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -39,7 +40,6 @@ public class VetCenter extends AbstractAggregateRoot<VetCenter> {
     @Setter
     private VetCenterPhone vetCenterPhone;
 
-    private String imageUrl;
     @OneToMany(mappedBy = "vetCenter", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<VetCenterImage> images = new ArrayList<>();
     /*
@@ -47,8 +47,13 @@ public class VetCenter extends AbstractAggregateRoot<VetCenter> {
     private String vetCenterServices; // seria un record (porque tiene 4 servicios) y cada servicio tiene un nombre y un precio
     */
 
+    @Getter
     @Setter
-    private String vetCenterPhoto;
+    private String vetCenterImageProfile;
+
+    @Getter
+    @Setter
+    private String vetCenterDescription;
 
     @CreatedDate
     private String createdAt;
@@ -56,11 +61,13 @@ public class VetCenter extends AbstractAggregateRoot<VetCenter> {
     @LastModifiedDate
     private String updatedAt;
 
-    public VetCenter(String name, String email, Long ruc, Long phone){
+    public VetCenter(String name, String email, Long ruc, Long phone, String imageProfile, String description){
         this.vetCenterName = new VetCenterName(name);
         this.vetCenterEmail = new VetCenterEmail(email);
         this.vetCenterRUC = new VetCenterRUC(ruc);
         this.vetCenterPhone = new VetCenterPhone(phone);
+        this.vetCenterImageProfile = imageProfile;
+        this.vetCenterDescription = description;
 
     }
 

@@ -39,7 +39,9 @@ public class VetCenterCommandServiceImpl implements VetCenterCommandService {
                 command.name(),
                 command.email(),
                 command.ruc(),
-                command.phone()
+                command.phone(),
+                command.imageProfile(),
+                command.description()
         );
 
         vetCenterRepository.save(vetCenter);
