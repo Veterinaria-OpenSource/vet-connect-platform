@@ -1,7 +1,7 @@
 package com.org.vetconnect.platform.iam.infrastructure.authorization.sfs.services;
 
 import com.org.vetconnect.platform.iam.infrastructure.authorization.sfs.model.UserDetailsImpl;
-import com.org.vetconnect.platform.iam.infrastructure.persistence.UserRepository;
+import com.org.vetconnect.platform.iam.infrastructure.persistence.jpa.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 @Service("defaultUserDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
-
     private final UserRepository userRepository;
 
     public UserDetailsServiceImpl(UserRepository userRepository) {
@@ -19,7 +18,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         var user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
         return UserDetailsImpl.build(user);
     }
 }

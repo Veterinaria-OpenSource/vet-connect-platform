@@ -1,5 +1,6 @@
 package com.org.vetconnect.platform.iam.domain.services;
 
+
 import com.org.vetconnect.platform.iam.domain.model.aggregates.User;
 import com.org.vetconnect.platform.iam.domain.model.commands.SignInCommand;
 import com.org.vetconnect.platform.iam.domain.model.commands.SignUpCommand;
@@ -9,7 +10,5 @@ import java.util.Optional;
 
 public interface UserCommandService {
     Optional<User> handle(SignUpCommand command);
-
-    // retorna el usuario y el token
     Optional<ImmutablePair<User, String>> handle(SignInCommand command);
 }

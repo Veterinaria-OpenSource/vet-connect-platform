@@ -4,14 +4,13 @@ import com.org.vetconnect.platform.iam.domain.model.commands.SeedRolesCommand;
 import com.org.vetconnect.platform.iam.domain.model.entities.Role;
 import com.org.vetconnect.platform.iam.domain.model.valueobjects.Roles;
 import com.org.vetconnect.platform.iam.domain.services.RoleCommandService;
-import com.org.vetconnect.platform.iam.infrastructure.persistence.RoleRepository;
+import com.org.vetconnect.platform.iam.infrastructure.persistence.jpa.repositories.RoleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 
 @Service
 public class RoleCommandServiceImpl implements RoleCommandService {
-
     private final RoleRepository roleRepository;
 
     public RoleCommandServiceImpl(RoleRepository roleRepository) {
@@ -21,8 +20,9 @@ public class RoleCommandServiceImpl implements RoleCommandService {
     @Override
     public void handle(SeedRolesCommand command) {
         Arrays.stream(Roles.values()).forEach(role -> {
-            if (!roleRepository.existsByName(role))
+            if(!roleRepository.existsByName(role)) {
                 roleRepository.save(new Role(Roles.valueOf(role.name())));
+            }
         });
     }
 }
