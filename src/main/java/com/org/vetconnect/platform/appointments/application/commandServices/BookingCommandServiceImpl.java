@@ -16,15 +16,11 @@ import org.springframework.stereotype.Service;
 public class BookingCommandServiceImpl implements BookingCommandService {
 
     private final BookingRepository bookingRepository;
-    private final PetOwnerRepository petOwnerRepository;
-    private final VetCenterRepository vetCenterRepository;
 
     private final ExternalProfilesService externalProfilesService;
 
-    public BookingCommandServiceImpl(BookingRepository bookingRepository, PetOwnerRepository petOwnerRepository, VetCenterRepository vetCenterRepository,ExternalProfilesService externalProfilesService) {
+    public BookingCommandServiceImpl(BookingRepository bookingRepository,ExternalProfilesService externalProfilesService) {
         this.bookingRepository = bookingRepository;
-        this.petOwnerRepository = petOwnerRepository;
-        this.vetCenterRepository = vetCenterRepository;
         this.externalProfilesService = externalProfilesService;
     }
 
