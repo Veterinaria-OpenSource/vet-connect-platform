@@ -7,6 +7,7 @@ import com.org.vetconnect.platform.iam.interfaces.rest.transform.RoleResourceFro
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import java.util.List;
  *  Roles Controller
  *  This controller is responsible for handling all the requests related to roles
  */
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/ap/v1/roles", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name = "Roles", description = "Role Management Endpoints")
