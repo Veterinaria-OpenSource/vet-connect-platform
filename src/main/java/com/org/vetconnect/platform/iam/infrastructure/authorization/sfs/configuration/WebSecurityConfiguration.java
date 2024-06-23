@@ -93,6 +93,10 @@ public class WebSecurityConfiguration {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(
                                 "/api/v1/authentication/**",
+                                "/api/v1/reviews/**",
+                                "/api/v1/vet-centers/**",
+                                "/api/v1/pet-owners/**",
+                                "/api/v1/bookings/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui.html",
                                 "/swagger-ui/**",
