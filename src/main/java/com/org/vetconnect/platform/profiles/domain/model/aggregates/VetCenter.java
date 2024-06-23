@@ -5,6 +5,7 @@ import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterE
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterName;
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterPhone;
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterRUC;
+import com.org.vetconnect.platform.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +19,7 @@ import java.util.List;
 
 @EntityListeners(AuditingEntityListener.class)
 @Entity
-public class VetCenter extends AbstractAggregateRoot<VetCenter> {
+public class VetCenter extends AuditableAbstractAggregateRoot<VetCenter> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,12 +55,6 @@ public class VetCenter extends AbstractAggregateRoot<VetCenter> {
     @Getter
     @Setter
     private String vetCenterDescription;
-
-    @CreatedDate
-    private String createdAt;
-
-    @LastModifiedDate
-    private String updatedAt;
 
     public VetCenter(String name, String email, Long ruc, Long phone, String imageProfile, String description){
         this.vetCenterName = new VetCenterName(name);

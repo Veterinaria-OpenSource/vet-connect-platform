@@ -1,6 +1,5 @@
 package com.org.vetconnect.platform.profiles.interfaces.rest;
 
-import com.org.vetconnect.platform.profiles.domain.model.entities.VetCenterImage;
 import com.org.vetconnect.platform.profiles.domain.model.queries.GetAllVetCenterImagesByVetCenterIdQuery;
 import com.org.vetconnect.platform.profiles.domain.model.queries.GetAllVetCentersQuery;
 import com.org.vetconnect.platform.profiles.domain.model.queries.GetVetCenterByIdQuery;

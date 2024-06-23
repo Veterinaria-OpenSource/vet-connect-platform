@@ -6,6 +6,7 @@ import com.org.vetconnect.platform.appointments.domain.model.valueobjects.Servic
 import com.org.vetconnect.platform.appointments.domain.model.valueobjects.VetCenterId;
 import com.org.vetconnect.platform.profiles.domain.model.aggregates.PetOwner;
 import com.org.vetconnect.platform.profiles.domain.model.aggregates.VetCenter;
+import com.org.vetconnect.platform.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 
 @EntityListeners(AuditingEntityListener.class) // para usar created_at y updated_at
 @Entity
-public class Booking {
+public class Booking extends AuditableAbstractAggregateRoot<Booking> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,12 +53,6 @@ public class Booking {
     @Getter
     @Setter
     private LocalDateTime date;
-
-    @CreatedDate
-    private String createdAt;
-
-    @LastModifiedDate
-    private String updatedAt;
 
     public Booking(PetOwnerId petOwner, VetCenterId vetCenter, ServiceType serviceType, BookingDetails bookingDetails, Double price, LocalDateTime date) {
         this.petOwnerId = petOwner;
