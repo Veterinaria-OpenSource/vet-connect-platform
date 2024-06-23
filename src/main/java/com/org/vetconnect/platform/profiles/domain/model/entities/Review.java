@@ -2,6 +2,7 @@ package com.org.vetconnect.platform.profiles.domain.model.entities;
 
 import com.org.vetconnect.platform.profiles.domain.model.aggregates.PetOwner;
 import com.org.vetconnect.platform.profiles.domain.model.aggregates.VetCenter;
+import com.org.vetconnect.platform.shared.domain.model.entities.AuditableModel;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
@@ -9,7 +10,7 @@ import org.springframework.data.annotation.CreatedDate;
 import java.time.LocalDate;
 
 @Entity
-public class Review {
+public class Review extends AuditableModel {
 
     @Id
     @Getter
@@ -34,7 +35,7 @@ public class Review {
     @Getter
     private int rating;
 
-    @CreatedDate // por si acaso
+
     private LocalDate createdAt;
 
     public Review(){
