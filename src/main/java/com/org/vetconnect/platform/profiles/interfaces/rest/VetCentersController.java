@@ -1,16 +1,17 @@
 package com.org.vetconnect.platform.profiles.interfaces.rest;
 
+import com.org.vetconnect.platform.profiles.domain.model.queries.GetAllVetCenterImagesByVetCenterIdQuery;
 import com.org.vetconnect.platform.profiles.domain.model.queries.GetAllVetCentersQuery;
 import com.org.vetconnect.platform.profiles.domain.model.queries.GetVetCenterByIdQuery;
 import com.org.vetconnect.platform.profiles.domain.model.queries.GetVetCenterByNameQuery;
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterName;
 import com.org.vetconnect.platform.profiles.domain.services.VetCenterCommandService;
 import com.org.vetconnect.platform.profiles.domain.services.VetCenterQueryService;
+import com.org.vetconnect.platform.profiles.interfaces.rest.resources.VetCenters.CreateVetCenterImageResource;
 import com.org.vetconnect.platform.profiles.interfaces.rest.resources.VetCenters.CreateVetCenterResource;
+import com.org.vetconnect.platform.profiles.interfaces.rest.resources.VetCenters.VetCenterImageResource;
 import com.org.vetconnect.platform.profiles.interfaces.rest.resources.VetCenters.VetCenterResource;
-import com.org.vetconnect.platform.profiles.interfaces.rest.transform.VetCenters.CreateVetCenterCommandFromResourceAssembler;
-import com.org.vetconnect.platform.profiles.interfaces.rest.transform.VetCenters.UpdateVetCenterCommandFromResourceAssembler;
-import com.org.vetconnect.platform.profiles.interfaces.rest.transform.VetCenters.VetCenterResourceFromEntityAssembler;
+import com.org.vetconnect.platform.profiles.interfaces.rest.transform.VetCenters.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -108,5 +109,25 @@ public class VetCentersController {
         return ResponseEntity.ok(vetCenterResources);
     }
 
+    @PostMapping("/{vetCenterId}/images")
+    public ResponseEntity<String> updateImage(@PathVariable Long vetCenterId, @RequestBody CreateVetCenterImageResource resource){
+        var getVetCenterByIdQuery = new GetVetCenterByIdQuery(vetCenterId);
+        var existingVetCenter = vetCenterQueryService.handle(getVetCenterByIdQuery);
+        if (existingVetCenter.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        var createVetCenterCommand = CreateVetCenterImageCommandFromResource.ToCommandFromResource(vetCenterId,resource);
+        var result = vetCenterCommandService.handle(createVetCenterCommand);
+        return ResponseEntity.ok("");
+    }
 
+    @GetMapping("/{vetCenterId}/images")
+    public ResponseEntity<List<VetCenterImageResource>> getAllVetCenterImages(@PathVariable Long vetCenterId){
+        var getAllVetCenterImagesQuery = new GetAllVetCenterImagesByVetCenterIdQuery(vetCenterId);
+        var vetCenterImages = vetCenterQueryService.handle(getAllVetCenterImagesQuery);
+        var vetCenterResources = vetCenterImages.stream()
+                .map(VetCenterImageResourceFromEntityAssembler::ToResourceFromEntity)
+                .toList();
+        return ResponseEntity.ok(vetCenterResources);
+    }
 }

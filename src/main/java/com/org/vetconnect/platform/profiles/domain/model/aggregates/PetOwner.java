@@ -4,17 +4,17 @@ import com.org.vetconnect.platform.profiles.domain.model.valueobjects.PetOwnerDN
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.PetOwnerEmail;
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.PetOwnerName;
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.PetOwnerPhone;
+import com.org.vetconnect.platform.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+
 import org.springframework.data.domain.AbstractAggregateRoot;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @EntityListeners(AuditingEntityListener.class)
 @Entity
-public class PetOwner extends AbstractAggregateRoot<PetOwner> {
+public class PetOwner extends AuditableAbstractAggregateRoot<PetOwner> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,13 +40,6 @@ public class PetOwner extends AbstractAggregateRoot<PetOwner> {
     @Setter
     private String petOwnerPhoto;
 
-
-
-    @CreatedDate
-    private String createdAt;
-
-    @LastModifiedDate
-    private String updatedAt;
 
     public PetOwner(String name, String email, Long dni, Long phone, String photo){
         this.petOwnerName = new PetOwnerName(name);

@@ -11,7 +11,9 @@ public class VetCenterResourceFromEntityAssembler {
                 vetCenter.getName(),
                 vetCenter.getEmail(),
                 vetCenter.getRUC(),
-                vetCenter.getPhone()
+                vetCenter.getPhone(),
+                vetCenter.getVetCenterImageProfile(),
+                vetCenter.getVetCenterDescription()
         );
     }
 

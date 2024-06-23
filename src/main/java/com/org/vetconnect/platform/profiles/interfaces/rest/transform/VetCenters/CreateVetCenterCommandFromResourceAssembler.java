@@ -10,7 +10,9 @@ public class CreateVetCenterCommandFromResourceAssembler {
                 resource.name(),
                 resource.email(),
                 resource.ruc(),
-                resource.phone()
+                resource.phone(),
+                resource.imageProfile(),
+                resource.description()
         );
     }
 }

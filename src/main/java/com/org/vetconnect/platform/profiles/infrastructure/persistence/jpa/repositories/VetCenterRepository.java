@@ -13,4 +13,5 @@ public interface VetCenterRepository extends JpaRepository<VetCenter, Long> {
 
     Optional<VetCenter> findVetCenterByVetCenterName(VetCenterName vetCenterName);
     Optional<VetCenter> findVetCenterByVetCenterRUC(VetCenterRUC vetCenterRUC);
+
 }

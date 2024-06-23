@@ -1,9 +1,12 @@
 package com.org.vetconnect.platform.appointments.domain.model.aggregates;
 
 import com.org.vetconnect.platform.appointments.domain.model.valueobjects.BookingDetails;
+import com.org.vetconnect.platform.appointments.domain.model.valueobjects.PetOwnerId;
 import com.org.vetconnect.platform.appointments.domain.model.valueobjects.ServiceType;
+import com.org.vetconnect.platform.appointments.domain.model.valueobjects.VetCenterId;
 import com.org.vetconnect.platform.profiles.domain.model.aggregates.PetOwner;
 import com.org.vetconnect.platform.profiles.domain.model.aggregates.VetCenter;
+import com.org.vetconnect.platform.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,8 +19,7 @@ import java.time.LocalDateTime;
 
 @EntityListeners(AuditingEntityListener.class) // para usar created_at y updated_at
 @Entity
-public class Booking {
-
+public class Booking extends AuditableAbstractAggregateRoot<Booking> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,15 +27,13 @@ public class Booking {
     @Setter
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "pet_owner_id", nullable = false)
+    @Embedded
     @Getter
-    private PetOwner petOwner;
+    private PetOwnerId petOwnerId;
 
-    @ManyToOne
-    @JoinColumn(name = "vet_center_id", nullable = false)
+    @Embedded
     @Getter
-    private VetCenter vetCenter;
+    private VetCenterId vetCenterId;
 
     @Enumerated(EnumType.STRING)
     @Getter
@@ -54,15 +54,9 @@ public class Booking {
     @Setter
     private LocalDateTime date;
 
-    @CreatedDate
-    private String createdAt;
-
-    @LastModifiedDate
-    private String updatedAt;
-
-    public Booking(PetOwner petOwner, VetCenter vetCenter, ServiceType serviceType, BookingDetails bookingDetails, Double price, LocalDateTime date) {
-        this.petOwner = petOwner;
-        this.vetCenter = vetCenter;
+    public Booking(PetOwnerId petOwner, VetCenterId vetCenter, ServiceType serviceType, BookingDetails bookingDetails, Double price, LocalDateTime date) {
+        this.petOwnerId = petOwner;
+        this.vetCenterId = vetCenter;
         this.serviceType = serviceType;
         this.bookingDetails = bookingDetails;
         this.price = price;

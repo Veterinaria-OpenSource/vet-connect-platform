@@ -2,10 +2,12 @@ package com.org.vetconnect.platform.profiles.application.commandServices;
 
 import com.org.vetconnect.platform.profiles.domain.model.aggregates.VetCenter;
 import com.org.vetconnect.platform.profiles.domain.model.commands.CreateVetCenterCommand;
+import com.org.vetconnect.platform.profiles.domain.model.commands.CreateVetCenterImageCommand;
 import com.org.vetconnect.platform.profiles.domain.model.commands.UpdateVetCenterCommand;
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterPhone;
 import com.org.vetconnect.platform.profiles.domain.model.valueobjects.VetCenterRUC;
 import com.org.vetconnect.platform.profiles.domain.services.VetCenterCommandService;
+import com.org.vetconnect.platform.profiles.infrastructure.persistence.jpa.repositories.VetCenterImageRepository;
 import com.org.vetconnect.platform.profiles.infrastructure.persistence.jpa.repositories.VetCenterRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +15,10 @@ import org.springframework.stereotype.Service;
 public class VetCenterCommandServiceImpl implements VetCenterCommandService {
 
     private final VetCenterRepository vetCenterRepository;
-
-    public VetCenterCommandServiceImpl(VetCenterRepository vetCenterRepository) {
+    private  final VetCenterImageRepository vetCenterImageRepository;
+    public VetCenterCommandServiceImpl(VetCenterRepository vetCenterRepository,VetCenterImageRepository vetCenterImageRepository) {
         this.vetCenterRepository = vetCenterRepository;
+        this.vetCenterImageRepository= vetCenterImageRepository;
     }
 
 
@@ -36,7 +39,9 @@ public class VetCenterCommandServiceImpl implements VetCenterCommandService {
                 command.name(),
                 command.email(),
                 command.ruc(),
-                command.phone()
+                command.phone(),
+                command.imageProfile(),
+                command.description()
         );
 
         vetCenterRepository.save(vetCenter);
@@ -71,5 +76,19 @@ public class VetCenterCommandServiceImpl implements VetCenterCommandService {
 
         vetCenterRepository.save(vetCenter);
         return vetCenter.getId();
+    }
+
+    @Override
+    public Long handle(CreateVetCenterImageCommand command) {
+        var vetCenterOpt = vetCenterRepository.findById(command.vetCenterId());
+        if (vetCenterOpt.isPresent()){
+            var vetCenter = vetCenterOpt.get();
+            vetCenter.addImage(command.imageUrl());
+            vetCenterRepository.save(vetCenter);
+            return vetCenter.getId();
+        }
+        else {
+            throw new IllegalArgumentException("VetCenter not found");
+        }
     }
 }
