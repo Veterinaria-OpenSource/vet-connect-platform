@@ -9,8 +9,8 @@ public class BookingResourceFromEntityAssembler {
     public BookingResource toResourceFromEntity(Booking booking) {
         return new BookingResource(
                 booking.getId(),
-                booking.getPetOwner().getId(),
-                booking.getVetCenter().getId(),
+                booking.getPetOwnerId().petOwnerId(),
+                booking.getVetCenterId().vetCenterId(),
                 booking.getServiceType(),
                 booking.getBookingDetails(),
                 booking.getPrice(),

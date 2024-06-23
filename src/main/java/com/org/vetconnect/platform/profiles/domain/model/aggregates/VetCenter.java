@@ -68,6 +68,7 @@ public class VetCenter extends AbstractAggregateRoot<VetCenter> {
         this.vetCenterPhone = new VetCenterPhone(phone);
         this.vetCenterImageProfile = imageProfile;
         this.vetCenterDescription = description;
+
     }
 
     public VetCenter(){
