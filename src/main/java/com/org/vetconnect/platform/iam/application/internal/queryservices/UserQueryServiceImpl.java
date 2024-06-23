@@ -3,8 +3,9 @@ package com.org.vetconnect.platform.iam.application.internal.queryservices;
 import com.org.vetconnect.platform.iam.domain.model.aggregates.User;
 import com.org.vetconnect.platform.iam.domain.model.queries.GetAllUsersQuery;
 import com.org.vetconnect.platform.iam.domain.model.queries.GetUserByIdQuery;
+import com.org.vetconnect.platform.iam.domain.model.queries.GetUserByUsernameQuery;
 import com.org.vetconnect.platform.iam.domain.services.UserQueryService;
-import com.org.vetconnect.platform.iam.infrastructure.persistence.UserRepository;
+import com.org.vetconnect.platform.iam.infrastructure.persistence.jpa.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,5 +27,10 @@ public class UserQueryServiceImpl implements UserQueryService {
     @Override
     public Optional<User> handle(GetUserByIdQuery query) {
         return userRepository.findById(query.userId());
+    }
+
+    @Override
+    public Optional<User> handle(GetUserByUsernameQuery query) {
+        return userRepository.findByUsername(query.username());
     }
 }

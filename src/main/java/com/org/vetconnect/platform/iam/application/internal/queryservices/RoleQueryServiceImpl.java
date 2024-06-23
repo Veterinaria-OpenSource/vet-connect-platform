@@ -1,10 +1,11 @@
 package com.org.vetconnect.platform.iam.application.internal.queryservices;
 
+
 import com.org.vetconnect.platform.iam.domain.model.entities.Role;
 import com.org.vetconnect.platform.iam.domain.model.queries.GetAllRolesQuery;
 import com.org.vetconnect.platform.iam.domain.model.queries.GetRoleByNameQuery;
 import com.org.vetconnect.platform.iam.domain.services.RoleQueryService;
-import com.org.vetconnect.platform.iam.infrastructure.persistence.RoleRepository;
+import com.org.vetconnect.platform.iam.infrastructure.persistence.jpa.repositories.RoleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,9 +19,6 @@ public class RoleQueryServiceImpl implements RoleQueryService {
         this.roleRepository = roleRepository;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public List<Role> handle(GetAllRolesQuery query) {
         return roleRepository.findAll();
@@ -28,6 +26,6 @@ public class RoleQueryServiceImpl implements RoleQueryService {
 
     @Override
     public Optional<Role> handle(GetRoleByNameQuery query) {
-        return roleRepository.findByName(query.name());
+        return roleRepository.findByName(query.roleName());
     }
 }

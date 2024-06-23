@@ -1,4 +1,4 @@
-package com.org.vetconnect.platform.iam.infrastructure.persistence;
+package com.org.vetconnect.platform.iam.infrastructure.persistence.jpa.repositories;
 
 import com.org.vetconnect.platform.iam.domain.model.entities.Role;
 import com.org.vetconnect.platform.iam.domain.model.valueobjects.Roles;
@@ -8,8 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface RoleRepository extends JpaRepository<Role, Long>{
     Optional<Role> findByName(Roles name);
-
     boolean existsByName(Roles name);
 }

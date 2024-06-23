@@ -7,7 +7,9 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 
 public class UsernamePasswordAuthenticationTokenBuilder {
     public static UsernamePasswordAuthenticationToken build(UserDetails principal, HttpServletRequest request) {
-        var usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(principal, null, principal.getAuthorities());
+        var usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(principal,
+                null,
+                principal.getAuthorities());
         usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         return usernamePasswordAuthenticationToken;
     }
