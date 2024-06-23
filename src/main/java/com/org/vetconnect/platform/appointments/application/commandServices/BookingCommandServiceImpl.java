@@ -1,5 +1,6 @@
 package com.org.vetconnect.platform.appointments.application.commandServices;
 
+import com.org.vetconnect.platform.appointments.application.outboundServices.ExternalProfilesService;
 import com.org.vetconnect.platform.appointments.domain.model.aggregates.Booking;
 import com.org.vetconnect.platform.appointments.domain.model.commands.CreateBookingCommand;
 import com.org.vetconnect.platform.appointments.domain.model.commands.DeleteBookingCommand;
@@ -18,21 +19,24 @@ public class BookingCommandServiceImpl implements BookingCommandService {
     private final PetOwnerRepository petOwnerRepository;
     private final VetCenterRepository vetCenterRepository;
 
-    public BookingCommandServiceImpl(BookingRepository bookingRepository, PetOwnerRepository petOwnerRepository, VetCenterRepository vetCenterRepository) {
+    private final ExternalProfilesService externalProfilesService;
+
+    public BookingCommandServiceImpl(BookingRepository bookingRepository, PetOwnerRepository petOwnerRepository, VetCenterRepository vetCenterRepository,ExternalProfilesService externalProfilesService) {
         this.bookingRepository = bookingRepository;
         this.petOwnerRepository = petOwnerRepository;
         this.vetCenterRepository = vetCenterRepository;
+        this.externalProfilesService = externalProfilesService;
     }
 
 
     @Override
     public Long handle(CreateBookingCommand command) {
         // validate if pet owner exists
-        PetOwner petOwner = petOwnerRepository.findById(command.petOwnerId())
+        var petOwner = externalProfilesService.fetchPetOwnerIdById(command.petOwnerId())
                 .orElseThrow(() -> new IllegalArgumentException("Pet owner not found"));
 
         // validate if vet center exists
-        VetCenter vetCenter = vetCenterRepository.findById(command.vetCenterId())
+        var vetCenter = externalProfilesService.fetchVetCenterIdById(command.vetCenterId())
                 .orElseThrow(() -> new IllegalArgumentException("Vet center not found"));
 
         // create booking

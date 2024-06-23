@@ -39,6 +39,7 @@ public class VetCenter extends AbstractAggregateRoot<VetCenter> {
     @Setter
     private VetCenterPhone vetCenterPhone;
 
+    private String imageUrl;
     @OneToMany(mappedBy = "vetCenter", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<VetCenterImage> images = new ArrayList<>();
     /*
@@ -60,6 +61,7 @@ public class VetCenter extends AbstractAggregateRoot<VetCenter> {
         this.vetCenterEmail = new VetCenterEmail(email);
         this.vetCenterRUC = new VetCenterRUC(ruc);
         this.vetCenterPhone = new VetCenterPhone(phone);
+
     }
 
     public VetCenter(){
