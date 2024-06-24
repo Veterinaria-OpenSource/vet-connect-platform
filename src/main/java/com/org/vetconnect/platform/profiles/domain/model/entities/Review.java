@@ -36,8 +36,6 @@ public class Review extends AuditableModel {
     private int rating;
 
 
-    private LocalDate createdAt;
-
     public Review(){
     }
 

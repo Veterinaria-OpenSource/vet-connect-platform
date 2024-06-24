@@ -10,6 +10,7 @@ import com.org.vetconnect.platform.profiles.interfaces.rest.resources.Reviews.Re
 import com.org.vetconnect.platform.profiles.interfaces.rest.transform.Reviews.CreateReviewCommandFromResourceAssembler;
 import com.org.vetconnect.platform.profiles.interfaces.rest.transform.Reviews.ReviewResourceFromEntityAssembler;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,12 +45,18 @@ public class ReviewsController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createReview(@RequestBody CreateReviewResource createReviewResource) {
+    public ResponseEntity<ReviewResource> createReview(@RequestBody CreateReviewResource createReviewResource) {
         CreateReviewCommand createReviewCommand = createReviewCommandFromResourceAssembler.toCommandFromResource(createReviewResource);
-        Review reviewId = reviewCommandService.handle(createReviewCommand);
-        return ResponseEntity.created(URI.create("/api/v1/reviews/" + reviewId)).build();
+        Review review = reviewCommandService.handle(createReviewCommand);
 
+        if (review == null) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Manejo de error genérico
+        }
+
+        ReviewResource reviewResource = reviewsResourceFromEntityAssembler.toResourceFromEntity(review);
+        return ResponseEntity.created(URI.create("/api/v1/reviews/" + review.getId())).body(reviewResource);
     }
+
 
     @GetMapping("/vet-center/{vetCenterId}")
     public ResponseEntity<List<ReviewResource>> getReviewsByVetCenterId(@PathVariable Long vetCenterId) {
